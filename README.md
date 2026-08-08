@@ -44,7 +44,7 @@ Run Behavioral Simulation for 1 us.
 ### 3. Simulation & Waveform Analysis
 The following waveform demonstrates the CPU successfully executing a conditional bne loop, highlighting the dynamic branch predictor and data forwarding logic in action.
 
-![Simulation Waveform](docs/waveform.png)
+![Simulation Waveform](waveform.png)
 
 Execution Breakdown:
 
