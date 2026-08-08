@@ -95,6 +95,23 @@ module cpu_core (
         .ex_pred_taken(ex_pred_taken), .ex_pred_target(ex_pred_target)
     );
 
+    // LOCAL PIPELINE HACK (ALU CONTROL)
+    // Delays the funct7[5] bit by one clock cycle to reach the EX stage.
+    reg ex_funct7_5;
+    always @(posedge clk or posedge rst) begin
+        if (rst || id_ex_flush)
+            ex_funct7_5 <= 1'b0;
+        else
+            ex_funct7_5 <= id_funct7[5];
+    end
+
+    // Dynamic ALU Controller:
+    // If it's a branch instruction, force SUB (001) so we can check equality.
+    // If it's a register-to-register math instruction AND funct7[5] is 1, it's a SUB.
+    // Otherwise, default to ADD (000).
+    wire [2:0] dynamic_alu_ctrl;
+    assign dynamic_alu_ctrl = (ex_branch | (~ex_alu_src & ex_funct7_5)) ? 3'b001 : 3'b000;
+
     // STAGE 3: EXECUTE & PREDICTION CHECK
     wire [1:0] forward_a, forward_b;
     reg [31:0] alu_in_a, alu_in_b_fw;
@@ -117,7 +134,7 @@ module cpu_core (
     
     // ALU Math
     alu alu_inst (
-        .a(alu_in_a), .b(alu_in_b), .alu_ctrl(3'b000), // Hardcoded ADD 
+        .a(alu_in_a), .b(alu_in_b), .alu_ctrl(dynamic_alu_ctrl), // Dynamically switches 
         .result(alu_result), .zero(alu_zero)
     );
 
@@ -130,7 +147,7 @@ module cpu_core (
         (ex_actual_taken & (ex_branch_target != ex_pred_target))
     );
     
-    // If we took a branch we sholudn't have, recover to PC+4. If we missed a branch, go to target.
+    // If we took a branch we shouldn't have, recover to PC+4. If we missed a branch, go to target.
     assign ex_correct_pc = ex_actual_taken ? ex_branch_target : (ex_pc + 32'd4);
 
     // BRANCH PREDICTOR
