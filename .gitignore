@@ -216,3 +216,34 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# Vivado generated files and folders to ignore
+*.jou
+*.log
+*.str
+*.dmp
+.Xil/
+.sim/
+.cache/
+.hw/
+.ip_user_files/
+*.runs/
+*.xpr
+
+# Ignore the compiled hex file
+instr.hex
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
