@@ -1,6 +1,6 @@
 # Initialization
-addi x1, x0, 3      # x1 = 3 (Our loop counter)
-addi x2, x0, 0      # x2 = 0 (Our sum tracker)
+addi x1, x0, 3      # x1 = 3 (Loop counter)
+addi x2, x0, 0      # x2 = 0 (Sum tracker)
 addi x3, x0, 1      # x3 = 1 (Decrement value)
 
 # The Loop
