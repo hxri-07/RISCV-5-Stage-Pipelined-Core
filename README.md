@@ -30,7 +30,7 @@ py assembler.py
 
 This outputs instr.hex, which the Verilog imem module reads upon reset.
 
-2. Hardware Simulation
+### 2. Hardware Simulation
 Create a new project in Xilinx Vivado.
 
 Add all Verilog files from the /src directory as Design Sources.
@@ -41,7 +41,7 @@ Ensure instr.hex is located in the simulation working directory.
 
 Run Behavioral Simulation for 1 us.
 
-Simulation & Waveform Analysis
+### 3. Simulation & Waveform Analysis
 The following waveform demonstrates the CPU successfully executing a conditional bne loop, highlighting the dynamic branch predictor and data forwarding logic in action.
 
 ![Simulation Waveform](docs/waveform.png)
