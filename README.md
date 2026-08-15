@@ -79,8 +79,8 @@ The processor includes hardware hazard detection and forwarding logic.
 Results can be forwarded directly to the Execute stage from:
 
 ```text
-EX/MEM → EX
-MEM/WB → EX
+EX/MEM > EX
+MEM/WB > EX
 ```
 
 This avoids unnecessary pipeline stalls for arithmetic dependencies.
@@ -312,7 +312,7 @@ Also make `software/instr.hex` available to the simulation so that the instructi
 Launch:
 
 ```text
-Flow → Run Simulation → Run Behavioral Simulation
+Flow > Run Simulation > Run Behavioral Simulation
 ```
 
 The supplied testbench automatically executes the comprehensive regression program and checks the resulting register and memory state.
