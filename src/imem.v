@@ -17,10 +17,7 @@ module imem (
             memory[i] = 32'h00000013;
 
         // Load program
-        $readmemh(
-            "D:/Personal/Vivado Projects/project_3/project_3.srcs/sources_1/new/instr.hex",
-            memory
-        );
+        $readmemh("instr.hex", memory);
 
     end
 
