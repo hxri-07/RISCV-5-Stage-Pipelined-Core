@@ -70,25 +70,6 @@ module decode_stage (
                 uses_rs2 = 1'b1;
             end
 
-            // LUI
-            7'b0110111: begin
-                imm_out = {instr[31:12], 12'b0};
-            end
-
-            // AUIPC
-            7'b0010111: begin
-                imm_out = {instr[31:12], 12'b0};
-            end
-
-            // JAL
-            7'b1101111: begin
-                imm_out = {{12{instr[31]}},
-                           instr[19:12],
-                           instr[20],
-                           instr[30:21],
-                           1'b0};
-            end
-
             // R-type
             7'b0110011: begin
                 uses_rs1 = 1'b1;
